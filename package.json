@@ -1,0 +1,22 @@
+{
+  "name": "starter-app-webstack",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack starter with PostgreSQL, Express, React, and Docker",
+  "scripts": {
+    "dev": "docker compose -f docker-compose.dev.yml up --build",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix backend && npm run build --prefix frontend",
+    "test": "npm run test --prefix backend && npm run test --prefix frontend",
+    "test:backend": "npm run test --prefix backend",
+    "test:frontend": "npm run test --prefix frontend",
+    "lint": "npm run lint --prefix backend && npm run lint --prefix frontend",
+    "lint:fix": "npm run lint:fix --prefix backend && npm run lint:fix --prefix frontend",
+    "format": "npm run format --prefix backend && npm run format --prefix frontend",
+    "format:check": "npm run format:check --prefix backend && npm run format:check --prefix frontend"
+  },
+  "keywords": ["starter", "fullstack", "express", "react", "postgres", "docker"],
+  "license": "MIT"
+}
+
