@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import ReduxExample from './index';
+import ReduxExample from './ReduxExample';
 import exampleReducer from '../../store/slices/example';
 
 const createTestStore = () =>

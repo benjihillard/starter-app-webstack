@@ -5,9 +5,9 @@ import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
-import ReduxExample from './pages/ReduxExample/index';
-import About from './pages/About/index';
-import ReactQueryExample from './pages/ReactQueryExample/index';
+import ReduxExample from './pages/ReduxExample';
+import About from './pages/About';
+import ReactQueryExample from './pages/ReactQueryExample';
 import exampleReducer from './store/slices/example';
 
 const createTestStore = () =>
