@@ -1,0 +1,116 @@
+/* ========================
+   BOX SIZING RESET
+   ========================
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ========================
+   DOCUMENT
+   ========================
+*/
+html {
+  font-size: 100%; /* Respects user browser settings */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+/* ========================
+   TYPOGRAPHY RESET
+   ========================
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: var(--space-sm);
+  line-height: var(--leading-tight);
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+}
+
+/* ========================
+   LINKS
+   ========================
+*/
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ========================
+   BUTTONS
+   ========================
+*/
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ========================
+   FORMS
+   ========================
+*/
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ========================
+   IMAGES
+   ========================
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ========================
+   CODE
+   ========================
+*/
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+/* ========================
+   FOCUS STYLES (accessibility)
+   ========================
+*/
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
