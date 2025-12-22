@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { screen, fireEvent } from '@testing-library/react';
-import { renderWithProviders } from '../../test';
-import ReduxExample from './ReduxExample';
+import { renderWithProviders } from '@/test';
+import ReduxExample from '@/pages/ReduxExample/ReduxExample';
 
 describe('ReduxExample', () => {
   it('renders heading', () => {

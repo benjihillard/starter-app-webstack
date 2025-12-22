@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import exampleReducer from '../store/slices/example';
+import exampleReducer from '@/store/slices/example';
 
 export const createTestStore = () =>
   configureStore({

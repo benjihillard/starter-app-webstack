@@ -1,4 +1,4 @@
-import { stackLogo } from '../../assets';
+import { stackLogo } from '@/assets';
 
 function About() {
   return (

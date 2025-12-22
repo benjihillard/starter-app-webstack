@@ -1,4 +1,4 @@
-import { useHealth } from '../../hooks/api';
+import { useHealth } from '@/hooks/api';
 
 function ReactQueryExample() {
   const { data, isLoading, error, refetch } = useHealth();

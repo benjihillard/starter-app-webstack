@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { screen } from '@testing-library/react';
-import { renderWithProviders } from '../../test';
-import Navbar from './Navbar';
+import { renderWithProviders } from '@/test';
+import Navbar from '@/components/Navbar/Navbar';
 
 describe('Navbar', () => {
   it('renders all navigation links', () => {

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { screen, waitFor } from '@testing-library/react';
-import { renderWithProviders } from '../../test';
-import ReactQueryExample from './ReactQueryExample';
+import { renderWithProviders } from '@/test';
+import ReactQueryExample from '@/pages/ReactQueryExample/ReactQueryExample';
 
 describe('ReactQueryExample', () => {
   beforeEach(() => {

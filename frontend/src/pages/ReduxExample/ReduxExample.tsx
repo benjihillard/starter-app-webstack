@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { increment, decrement, setValue } from '../../store/slices/example';
-import { tryParseNumber } from '../../utils';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { increment, decrement, setValue } from '@/store/slices/example';
+import { tryParseNumber } from '@/utils';
 
 function ReduxExample() {
   const dispatch = useAppDispatch();

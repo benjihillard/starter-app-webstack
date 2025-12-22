@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { createTestStore, createTestQueryClient } from '../test';
-import App from './App';
-import ReduxExample from '../pages/ReduxExample';
-import About from '../pages/About';
-import ReactQueryExample from '../pages/ReactQueryExample';
+import { createTestStore, createTestQueryClient } from '@/test';
+import App from '@/app/App';
+import ReduxExample from '@/pages/ReduxExample';
+import About from '@/pages/About';
+import ReactQueryExample from '@/pages/ReactQueryExample';
 
 const renderApp = (initialRoute = '/') => {
   const store = createTestStore();
