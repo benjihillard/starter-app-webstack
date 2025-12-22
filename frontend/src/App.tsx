@@ -1,24 +1,18 @@
-import { useState, useEffect } from 'react';
-
-interface HealthStatus {
-  status: string;
-  database: string;
-}
+import { Link, Outlet } from 'react-router-dom';
 
 function App() {
-  const [health, setHealth] = useState<HealthStatus | null>(null);
-  useEffect(() => {
-    fetch('/api/health')
-      .then((res) => res.json())
-      .then((data) => setHealth(data))
-      .catch(() => setHealth({ status: 'error', database: 'unreachable' }));
-  }, []);
-
   return (
     <div>
       <h1>Starter App</h1>
-      <p>Backend Status: {health ? health.status : 'Loading...'}</p>
-      <p>Database: {health ? health.database : 'Loading...'}</p>
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/redux">Redux</Link> | <Link to="/status">Status</Link>
+      </nav>
+      <hr />
+      <Outlet />
+      <hr />
+      <footer>
+        <p>footer</p>
+      </footer>
     </div>
   );
 }
