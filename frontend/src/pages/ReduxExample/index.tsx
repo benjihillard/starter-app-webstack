@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { increment, decrement, setValue } from '../store/slices/example';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { increment, decrement, setValue } from '../../store/slices/example';
 
 function ReduxExample() {
   const dispatch = useAppDispatch();
