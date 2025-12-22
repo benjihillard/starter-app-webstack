@@ -1,12 +1,11 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div>
       <h1>Starter App</h1>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/redux">Redux</Link> | <Link to="/status">Status</Link>
-      </nav>
+      <Navbar />
       <hr />
       <Outlet />
       <hr />
