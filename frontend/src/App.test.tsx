@@ -1,12 +1,13 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
 import ReduxExample from './pages/ReduxExample/index';
 import About from './pages/About/index';
-import Status from './pages/Status/index';
+import ReactQueryExample from './pages/ReactQueryExample/index';
 import exampleReducer from './store/slices/example';
 
 const createTestStore = () =>
@@ -16,7 +17,17 @@ const createTestStore = () =>
     },
   });
 
+const createTestQueryClient = () =>
+  new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
 const renderApp = (initialRoute = '/', store = createTestStore()) => {
+  const queryClient = createTestQueryClient();
   const router = createMemoryRouter(
     [
       {
@@ -25,7 +36,7 @@ const renderApp = (initialRoute = '/', store = createTestStore()) => {
         children: [
           { index: true, element: <About /> },
           { path: 'redux', element: <ReduxExample /> },
-          { path: 'status', element: <Status /> },
+          { path: 'react-query', element: <ReactQueryExample /> },
         ],
       },
     ],
@@ -33,13 +44,22 @@ const renderApp = (initialRoute = '/', store = createTestStore()) => {
   );
 
   return render(
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </QueryClientProvider>,
   );
 };
 
 describe('App Integration', () => {
+  beforeEach(() => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ status: 'ok', database: 'connected' }),
+    } as Response);
+  });
+
   it('renders the app shell', () => {
     renderApp();
     expect(screen.getByText('Starter App')).toBeInTheDocument();
@@ -56,8 +76,8 @@ describe('App Integration', () => {
     expect(screen.getByRole('heading', { name: 'Redux Example' })).toBeInTheDocument();
   });
 
-  it('navigates to Status page', () => {
-    renderApp('/status');
-    expect(screen.getByRole('heading', { name: 'API Status' })).toBeInTheDocument();
+  it('navigates to React Query page', () => {
+    renderApp('/react-query');
+    expect(screen.getByRole('heading', { name: 'React Query Example' })).toBeInTheDocument();
   });
 });

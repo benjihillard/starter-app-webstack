@@ -15,13 +15,16 @@ describe('Navbar', () => {
     renderNavbar();
     expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Redux' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Status' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'React Query' })).toBeInTheDocument();
   });
 
   it('links have correct hrefs', () => {
     renderNavbar();
     expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
     expect(screen.getByRole('link', { name: 'Redux' })).toHaveAttribute('href', '/redux');
-    expect(screen.getByRole('link', { name: 'Status' })).toHaveAttribute('href', '/status');
+    expect(screen.getByRole('link', { name: 'React Query' })).toHaveAttribute(
+      'href',
+      '/react-query',
+    );
   });
 });
