@@ -1,25 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { screen, waitFor } from '@testing-library/react';
+import { renderWithProviders } from '../../test';
 import ReactQueryExample from './ReactQueryExample';
-
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-
-const renderWithQueryClient = () => {
-  const queryClient = createTestQueryClient();
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryExample />
-    </QueryClientProvider>,
-  );
-};
 
 describe('ReactQueryExample', () => {
   beforeEach(() => {
@@ -32,7 +14,7 @@ describe('ReactQueryExample', () => {
       json: () => Promise.resolve({ status: 'ok', database: 'connected' }),
     } as Response);
 
-    renderWithQueryClient();
+    renderWithProviders(<ReactQueryExample />);
     expect(screen.getByRole('heading', { name: 'React Query Example' })).toBeInTheDocument();
   });
 
@@ -42,7 +24,7 @@ describe('ReactQueryExample', () => {
       json: () => Promise.resolve({ status: 'ok', database: 'connected' }),
     } as Response);
 
-    renderWithQueryClient();
+    renderWithProviders(<ReactQueryExample />);
     expect(screen.getByText('Fetching...')).toBeInTheDocument();
   });
 
@@ -52,7 +34,7 @@ describe('ReactQueryExample', () => {
       json: () => Promise.resolve({ status: 'ok', database: 'connected' }),
     } as Response);
 
-    renderWithQueryClient();
+    renderWithProviders(<ReactQueryExample />);
 
     await waitFor(() => {
       expect(screen.getByText(/"status": "ok"/)).toBeInTheDocument();
@@ -64,7 +46,7 @@ describe('ReactQueryExample', () => {
       ok: false,
     } as Response);
 
-    renderWithQueryClient();
+    renderWithProviders(<ReactQueryExample />);
 
     await waitFor(() => {
       expect(screen.getByText(/Error:/)).toBeInTheDocument();

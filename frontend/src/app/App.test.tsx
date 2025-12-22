@@ -2,31 +2,15 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
-import { configureStore } from '@reduxjs/toolkit';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { createTestStore, createTestQueryClient } from '../test';
 import App from './App';
-import ReduxExample from './pages/ReduxExample';
-import About from './pages/About';
-import ReactQueryExample from './pages/ReactQueryExample';
-import exampleReducer from './store/slices/example';
+import ReduxExample from '../pages/ReduxExample';
+import About from '../pages/About';
+import ReactQueryExample from '../pages/ReactQueryExample';
 
-const createTestStore = () =>
-  configureStore({
-    reducer: {
-      example: exampleReducer,
-    },
-  });
-
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-
-const renderApp = (initialRoute = '/', store = createTestStore()) => {
+const renderApp = (initialRoute = '/') => {
+  const store = createTestStore();
   const queryClient = createTestQueryClient();
   const router = createMemoryRouter(
     [

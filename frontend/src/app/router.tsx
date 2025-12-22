@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
-import About from './pages/About';
-import ReduxExample from './pages/ReduxExample';
-import ReactQueryExample from './pages/ReactQueryExample';
+import About from '../pages/About';
+import ReduxExample from '../pages/ReduxExample';
+import ReactQueryExample from '../pages/ReactQueryExample';
 
 export const router = createBrowserRouter([
   {
