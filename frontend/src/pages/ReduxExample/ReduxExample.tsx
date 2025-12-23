@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { increment, decrement, setValue } from '@/store/slices/example';
 import { tryParseNumber } from '@/utils';
+import styles from './ReduxExample.module.css';
 
 function ReduxExample() {
   const dispatch = useAppDispatch();
@@ -23,7 +24,7 @@ function ReduxExample() {
       <button type="button" onClick={() => dispatch(decrement())}>
         -
       </button>
-      <input type="number" value={value} onChange={handleInputChange} style={{ margin: '0 8px' }} />
+      <input type="number" value={value} onChange={handleInputChange} className={styles.input} />
     </div>
   );
 }

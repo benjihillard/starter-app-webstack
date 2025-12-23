@@ -3,13 +3,13 @@ import { render, screen } from '@testing-library/react';
 import About from './About';
 
 describe('About', () => {
-  it('renders heading', () => {
+  it('renders the feature list', () => {
     render(<About />);
-    expect(screen.getByRole('heading', { name: 'About' })).toBeInTheDocument();
+    expect(screen.getByRole('list')).toBeInTheDocument();
   });
 
-  it('renders description', () => {
+  it('renders description content', () => {
     render(<About />);
-    expect(screen.getByText(/full-stack starter/i)).toBeInTheDocument();
+    expect(screen.getByText(/Supercharged Starter Stack/i)).toBeInTheDocument();
   });
 });

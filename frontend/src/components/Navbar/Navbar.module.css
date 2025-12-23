@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-md);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  line-height: 1;
+  color: var(--color-purple);
+}
+
+.nav {
+  background-color: var(--color-purple);
+  border-top-left-radius: 99px;
+  border-bottom-left-radius: 99px;
+  width: 80%;
+  height: 60px;
+  display: flex;
+  justify-self: flex-start;
+  align-items: center;
+  padding-left: var(--space-xl);
+  gap: var(--space-md);
+}
+
+.link {
+  color: var(--color-cream);
+}
+

@@ -11,6 +11,12 @@
   flex-direction: column;
 }
 
+.flex-baseline {
+  display: flex;
+  align-items: baseline;
+}
+
+
 .flex-center {
   display: flex;
   align-items: center;

@@ -1,0 +1,10 @@
+.error {
+  color: var(--color-error);
+}
+
+.codeBlock {
+  background: var(--color-surface);
+  padding: var(--space-md);
+  border-radius: var(--border-radius);
+}
+

@@ -1,12 +1,25 @@
 import { Link } from 'react-router-dom';
+import { stackLogo } from '@/assets';
+import styles from './Navbar.module.css';
 
-function Navbar() {
+export default function Navbar() {
   return (
-    <nav>
-      <Link to="/">Home</Link> | <Link to="/redux">Redux</Link> |{' '}
-      <Link to="/react-query">React Query</Link>
-    </nav>
+    <div className={styles.container}>
+      <div className={styles.brand}>
+        <img src={stackLogo} alt="Stack logo" width={80} height={80} />
+        <h1 className={styles.title}>Starter App</h1>
+      </div>
+      <nav className={styles.nav}>
+        <Link to="/" className={styles.link}>
+          Home
+        </Link>
+        <Link to="/redux" className={styles.link}>
+          Redux
+        </Link>
+        <Link to="/react-query" className={styles.link}>
+          React Query
+        </Link>
+      </nav>
+    </div>
   );
 }
-
-export default Navbar;

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
   <!-- Full-stack layers icon -->
-  <rect x="15" y="60" width="70" height="16" rx="3" fill="#2563eb"/>
-  <rect x="15" y="40" width="70" height="16" rx="3" fill="#3b82f6"/>
-  <rect x="15" y="20" width="70" height="16" rx="3" fill="#60a5fa"/>
+  <rect x="15" y="60" width="70" height="16" rx="3" fill="#ff5e33"/>
+  <rect x="15" y="40" width="70" height="16" rx="3" fill="#bfcf4f"/>
+  <rect x="15" y="20" width="70" height="16" rx="3" fill="#1a0089"/>
 </svg>
 

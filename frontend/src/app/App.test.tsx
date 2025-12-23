@@ -52,7 +52,7 @@ describe('App Integration', () => {
 
   it('renders home page (About) by default', () => {
     renderApp('/');
-    expect(screen.getByRole('heading', { name: 'About' })).toBeInTheDocument();
+    expect(screen.getByText(/Supercharged Starter Stack/i)).toBeInTheDocument();
   });
 
   it('navigates to Redux page', () => {

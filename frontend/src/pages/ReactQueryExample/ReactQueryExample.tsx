@@ -1,4 +1,5 @@
 import { useHealth } from '@/hooks/api';
+import styles from './ReactQueryExample.module.css';
 
 function ReactQueryExample() {
   const { data, isLoading, error, refetch } = useHealth();
@@ -10,18 +11,8 @@ function ReactQueryExample() {
         {isLoading ? 'Fetching...' : 'Refresh'}
       </button>
       <h3>Response:</h3>
-      {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
-      {data && (
-        <pre
-          style={{
-            background: '#f4f4f4',
-            padding: '1rem',
-            borderRadius: '4px',
-          }}
-        >
-          {JSON.stringify(data, null, 2)}
-        </pre>
-      )}
+      {error && <p className={styles.error}>Error: {error.message}</p>}
+      {data && <pre className={styles.codeBlock}>{JSON.stringify(data, null, 2)}</pre>}
     </div>
   );
 }

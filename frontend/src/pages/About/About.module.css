@@ -1,0 +1,16 @@
+.container {
+  background-color: var(--color-lime);
+  padding: var(--space-md);
+  width: 85%;
+  border-radius: 60px;
+  transform: rotate(4deg);
+}
+
+.list {
+  color: var(--color-purple);
+  font-size: var(--text-lg);
+  list-style: disc;
+  text-align: left;
+  line-height: 1.7;
+}
+
