@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import styles from './App.module.css';
 
 function App() {
@@ -11,9 +12,7 @@ function App() {
         <Outlet />
       </div>
       <hr />
-      <footer className={styles.footer}>
-        <h1 className={styles.footerText}>@2025 Starter App Baby!!</h1>
-      </footer>
+      <Footer />
     </div>
   );
 }

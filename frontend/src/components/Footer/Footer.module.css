@@ -1,0 +1,20 @@
+.footer {
+  background-color: var(--color-orange);
+  border-top-right-radius: 99px;
+  border-bottom-right-radius: 99px;
+  width: 89%;
+  height: 60px;
+  margin-bottom: var(--space-md);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: var(--space-xl);
+}
+
+.text {
+  margin: 0;
+  line-height: 1;
+  font-size: var(--text-base);
+  color: var(--color-cream);
+}
+
