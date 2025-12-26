@@ -3,10 +3,6 @@
   margin: 0 auto;
 }
 
-.title {
-  text-align: center;
-}
-
 .button {
   background-color: var(--color-purple);
   color: var(--color-cream);
@@ -37,3 +33,4 @@
   border-radius: var(--border-radius);
   overflow-x: auto;
 }
+

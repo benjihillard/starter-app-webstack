@@ -5,9 +5,9 @@ import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { createTestStore, createTestQueryClient } from '@/test';
 import App from '@/app/App';
-import ReduxExample from '@/pages/ReduxExample';
 import About from '@/pages/About';
-import ReactQueryExample from '@/pages/ReactQueryExample';
+import CounterPage from '@/pages/CounterPage';
+import HealthPage from '@/pages/HealthPage';
 
 const renderApp = (initialRoute = '/') => {
   const store = createTestStore();
@@ -19,8 +19,8 @@ const renderApp = (initialRoute = '/') => {
         element: <App />,
         children: [
           { index: true, element: <About /> },
-          { path: 'redux', element: <ReduxExample /> },
-          { path: 'react-query', element: <ReactQueryExample /> },
+          { path: 'counter', element: <CounterPage /> },
+          { path: 'health', element: <HealthPage /> },
         ],
       },
     ],
@@ -55,13 +55,13 @@ describe('App Integration', () => {
     expect(screen.getByText(/Supercharged Starter Stack/i)).toBeInTheDocument();
   });
 
-  it('navigates to Redux page', () => {
-    renderApp('/redux');
-    expect(screen.getByRole('heading', { name: 'Redux Example' })).toBeInTheDocument();
+  it('navigates to Counter page', () => {
+    renderApp('/counter');
+    expect(screen.getByRole('heading', { name: 'Redux Counter' })).toBeInTheDocument();
   });
 
-  it('navigates to React Query page', () => {
-    renderApp('/react-query');
-    expect(screen.getByRole('heading', { name: 'React Query Example' })).toBeInTheDocument();
+  it('navigates to Health page', () => {
+    renderApp('/health');
+    expect(screen.getByRole('heading', { name: 'Health Check' })).toBeInTheDocument();
   });
 });

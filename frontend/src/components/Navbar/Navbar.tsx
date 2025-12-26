@@ -13,11 +13,11 @@ export default function Navbar() {
         <Link to="/" className={styles.link}>
           Home
         </Link>
-        <Link to="/redux" className={styles.link}>
-          Redux
+        <Link to="/counter" className={styles.link}>
+          Counter
         </Link>
-        <Link to="/react-query" className={styles.link}>
-          React Query
+        <Link to="/health" className={styles.link}>
+          Health
         </Link>
       </nav>
     </div>

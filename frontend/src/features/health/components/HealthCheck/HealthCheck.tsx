@@ -1,12 +1,11 @@
-import { useHealth } from '@/hooks/api';
-import styles from './ReactQueryExample.module.css';
+import { useHealth } from '../../hooks';
+import styles from './HealthCheck.module.css';
 
-function ReactQueryExample() {
+function HealthCheck() {
   const { data, isLoading, error, refetch } = useHealth();
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>React Query Example</h1>
       <button
         type="button"
         onClick={() => refetch()}
@@ -22,4 +21,4 @@ function ReactQueryExample() {
   );
 }
 
-export default ReactQueryExample;
+export default HealthCheck;

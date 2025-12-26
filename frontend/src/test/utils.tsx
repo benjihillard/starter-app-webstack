@@ -4,12 +4,12 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import exampleReducer from '@/store/slices/example';
+import { counterReducer } from '@/features/counter';
 
 export const createTestStore = () =>
   configureStore({
     reducer: {
-      example: exampleReducer,
+      counter: counterReducer,
     },
   });
 

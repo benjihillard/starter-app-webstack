@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { increment, decrement, setValue } from '@/store/slices/example';
 import { tryParseNumber } from '@/utils';
+import { increment, decrement, setValue } from '../../store/counterSlice';
 import styles from './Counter.module.css';
 
 function Counter() {
   const dispatch = useAppDispatch();
-  const value = useAppSelector((state) => state.example.value);
+  const value = useAppSelector((state) => state.counter.value);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const num = tryParseNumber(e.target.value);

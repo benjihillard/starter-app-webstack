@@ -1,21 +1,21 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { screen, waitFor } from '@testing-library/react';
 import { renderWithProviders } from '@/test';
-import ReactQueryExample from '@/pages/ReactQueryExample/ReactQueryExample';
+import HealthCheck from './HealthCheck';
 
-describe('ReactQueryExample', () => {
+describe('HealthCheck', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
   });
 
-  it('renders heading', () => {
+  it('renders refresh button', () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue({
       ok: true,
       json: () => Promise.resolve({ status: 'ok', database: 'connected' }),
     } as Response);
 
-    renderWithProviders(<ReactQueryExample />);
-    expect(screen.getByRole('heading', { name: 'React Query Example' })).toBeInTheDocument();
+    renderWithProviders(<HealthCheck />);
+    expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
   it('shows loading state initially', () => {
@@ -24,7 +24,7 @@ describe('ReactQueryExample', () => {
       json: () => Promise.resolve({ status: 'ok', database: 'connected' }),
     } as Response);
 
-    renderWithProviders(<ReactQueryExample />);
+    renderWithProviders(<HealthCheck />);
     expect(screen.getByText('Fetching...')).toBeInTheDocument();
   });
 
@@ -34,7 +34,7 @@ describe('ReactQueryExample', () => {
       json: () => Promise.resolve({ status: 'ok', database: 'connected' }),
     } as Response);
 
-    renderWithProviders(<ReactQueryExample />);
+    renderWithProviders(<HealthCheck />);
 
     await waitFor(() => {
       expect(screen.getByText(/"status": "ok"/)).toBeInTheDocument();
@@ -46,7 +46,7 @@ describe('ReactQueryExample', () => {
       ok: false,
     } as Response);
 
-    renderWithProviders(<ReactQueryExample />);
+    renderWithProviders(<HealthCheck />);
 
     await waitFor(() => {
       expect(screen.getByText(/Error:/)).toBeInTheDocument();
