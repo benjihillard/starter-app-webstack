@@ -7,4 +7,3 @@ describe('Health Route', () => {
     expect(mockResponse).toHaveProperty('database');
   });
 });
-
