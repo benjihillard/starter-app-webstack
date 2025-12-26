@@ -15,7 +15,9 @@
     "lint": "npm run lint --prefix backend && npm run lint --prefix frontend",
     "lint:fix": "npm run lint:fix --prefix backend && npm run lint:fix --prefix frontend",
     "format": "npm run format --prefix backend && npm run format --prefix frontend",
-    "format:check": "npm run format:check --prefix backend && npm run format:check --prefix frontend"
+    "format:check": "npm run format:check --prefix backend && npm run format:check --prefix frontend",
+    "storybook": "npm run storybook --prefix frontend",
+    "build-storybook": "npm run build-storybook --prefix frontend"
   },
   "keywords": ["starter", "fullstack", "express", "react", "postgres", "docker"],
   "license": "MIT"

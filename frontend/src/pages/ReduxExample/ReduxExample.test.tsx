@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { screen, fireEvent } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { renderWithProviders } from '@/test';
-import ReduxExample from '@/pages/ReduxExample/ReduxExample';
+import ReduxExample from './ReduxExample';
 
 describe('ReduxExample', () => {
   it('renders heading', () => {
@@ -14,21 +14,10 @@ describe('ReduxExample', () => {
     expect(screen.getByText('Value: 0')).toBeInTheDocument();
   });
 
-  it('increments value when + button is clicked', () => {
+  it('renders the Counter component', () => {
     renderWithProviders(<ReduxExample />);
-    fireEvent.click(screen.getByText('+'));
-    expect(screen.getByText('Value: 1')).toBeInTheDocument();
-  });
-
-  it('decrements value when - button is clicked', () => {
-    renderWithProviders(<ReduxExample />);
-    fireEvent.click(screen.getByText('-'));
-    expect(screen.getByText('Value: -1')).toBeInTheDocument();
-  });
-
-  it('updates value via input', () => {
-    renderWithProviders(<ReduxExample />);
-    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '42' } });
-    expect(screen.getByText('Value: 42')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '+' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '-' })).toBeInTheDocument();
+    expect(screen.getByRole('spinbutton')).toBeInTheDocument();
   });
 });

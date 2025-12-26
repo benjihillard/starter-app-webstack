@@ -5,9 +5,14 @@ function ReactQueryExample() {
   const { data, isLoading, error, refetch } = useHealth();
 
   return (
-    <div>
-      <h2>React Query Example</h2>
-      <button type="button" onClick={() => refetch()} disabled={isLoading}>
+    <div className={styles.container}>
+      <h1 className={styles.title}>React Query Example</h1>
+      <button
+        type="button"
+        onClick={() => refetch()}
+        disabled={isLoading}
+        className={styles.button}
+      >
         {isLoading ? 'Fetching...' : 'Refresh'}
       </button>
       <h3>Response:</h3>

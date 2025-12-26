@@ -1,4 +1,9 @@
-.input {
-  margin: 0 var(--space-sm);
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
 }
 
