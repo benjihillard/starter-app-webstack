@@ -1,6 +1,6 @@
 # Starter App Webstack
 
-A barebones full-stack starter with PostgreSQL, Express.js, React, and Docker.
+A full-stack starter with PostgreSQL, Express.js, React (with Redux, React Router, and React Query), Storybook, and Docker. Includes authentication, user management, and database migrations. Built with TypeScript, ESLint, and Vitest for robust development.
 
 ## Tech Stack
 
@@ -65,16 +65,31 @@ npm run dev:frontend
 ```
 ├── backend/
 │   ├── src/
-│   │   ├── index.ts          # Express app entry
-│   │   ├── db/               # Database connection
-│   │   └── routes/           # API routes
+│   │   ├── app.ts            # Express app setup
+│   │   ├── server.ts         # Server entry point
+│   │   ├── routes/           # API route definitions
+│   │   ├── features/         # Feature modules
+│   │   │   ├── auth/         # Authentication (login, register)
+│   │   │   ├── users/        # User management
+│   │   │   └── health/       # Health check endpoint
+│   │   └── shared/           # Shared utilities
+│   │       ├── config/       # Configuration & migrations
+│   │       ├── middleware/   # Express middleware
+│   │       └── utils/        # Utility functions
 │   ├── Dockerfile            # Production build
 │   ├── Dockerfile.dev        # Development build
 │   └── vitest.config.ts      # Test config
 ├── frontend/
 │   ├── src/
 │   │   ├── main.tsx          # React entry
-│   │   └── App.tsx           # Main component
+│   │   ├── app/              # App shell & routing
+│   │   ├── features/         # Feature modules
+│   │   │   ├── auth/         # Authentication UI
+│   │   │   ├── counter/      # Counter example
+│   │   │   └── health/       # Health check UI
+│   │   ├── pages/             # Page components
+│   │   ├── components/        # Shared components
+│   │   └── styles/           # Global styles
 │   ├── Dockerfile            # Production build (nginx)
 │   ├── Dockerfile.dev        # Development build
 │   └── vitest.config.ts      # Test config
@@ -95,6 +110,9 @@ npm run dev:frontend
 | `DB_NAME` | app_db | Database name |
 | `DB_USER` | postgres | Database user |
 | `DB_PASSWORD` | postgres | Database password |
+| `JWT_SECRET` | your-secret-key-change-in-production | JWT signing secret |
+| `JWT_EXPIRES_IN` | 7d | JWT token expiration |
+| `NODE_ENV` | development | Environment mode |
 
 ## Docker Commands
 
@@ -130,9 +148,190 @@ cd frontend && npx vitest run --coverage
 
 ## API Endpoints
 
+### Health
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/api/health` | Health check (returns DB status) |
+
+### Authentication
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Login and get JWT token |
+| GET | `/api/auth/me` | Get current user (requires auth) |
+
+### Users
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/users` | Get all users |
+| GET | `/api/users/:id` | Get user by ID |
+| POST | `/api/users` | Create a new user |
+
+## Features
+
+### Backend
+
+- **Database Migrations**: Automatic schema migrations on server startup
+- **Authentication**: JWT-based authentication with password hashing
+- **User Management**: CRUD operations for users
+- **Path Aliases**: Use `@/` prefix for cleaner imports (e.g., `@/shared/utils`)
+- **Middleware**: Centralized middleware configuration
+- **Error Handling**: Consistent error handling across all endpoints
+
+### Frontend
+
+- **Authentication UI**: Login and signup forms with token management
+- **React Query**: Data fetching and caching
+- **Path Aliases**: Use `@/` prefix for imports (e.g., `@/features/auth`)
+- **Routing**: React Router with protected routes support
+- **State Management**: Redux Toolkit for global state
+
+## Database
+
+The database schema is automatically created on server startup via migrations. The initial migration creates:
+
+- `users` table with email, password hash, and timestamps
+- `migrations` table to track executed migrations
+
+Migrations are stored in `backend/src/shared/config/migrations.ts` and run automatically when the server starts.
+
+## Starting Fresh
+
+To remove all example features and start building your own:
+
+### Backend Cleanup
+
+1. **Remove feature directories:**
+   ```bash
+   rm -rf backend/src/features/auth
+   rm -rf backend/src/features/users
+   rm -rf backend/src/features/health
+   ```
+
+2. **Update routes** (`backend/src/routes/index.ts`):
+   ```typescript
+   import { Router } from 'express';
+   
+   const router = Router();
+   
+   // Add your routes here
+   
+   export { router };
+   ```
+
+3. **Clear migrations** (`backend/src/shared/config/migrations.ts`):
+   ```typescript
+   const migrations: Array<{ name: string; up: string }> = [];
+   
+   // Add your migrations here
+   ```
+
+4. **Reset database** (if you want to start with a clean database):
+   ```bash
+   # Stop containers
+   docker compose down
+   
+   # Remove volume (WARNING: deletes all data)
+   docker volume rm starter-app-webstack_postgres_data
+   
+   # Or connect to database and drop tables manually
+   docker compose -f docker-compose.dev.yml exec db psql -U postgres -d app_db
+   # Then: DROP TABLE IF EXISTS users, migrations CASCADE;
+   ```
+
+### Frontend Cleanup
+
+1. **Remove feature directories:**
+   ```bash
+   rm -rf frontend/src/features/auth
+   rm -rf frontend/src/features/counter
+   rm -rf frontend/src/features/health
+   ```
+
+2. **Remove example pages:**
+   ```bash
+   rm -rf frontend/src/pages/CounterPage
+   rm -rf frontend/src/pages/HealthPage
+   rm -rf frontend/src/pages/AuthPage
+   ```
+
+3. **Update router** (`frontend/src/app/router.tsx`):
+   ```typescript
+   import { createBrowserRouter } from 'react-router-dom';
+   import App from '@/app/App';
+   import About from '@/pages/About';
+   
+   export const router = createBrowserRouter([
+     {
+       path: '/',
+       element: <App />,
+       children: [
+         { index: true, element: <About /> },
+         // Add your routes here
+       ],
+     },
+   ]);
+   ```
+
+4. **Update navbar** (`frontend/src/components/Navbar/Navbar.tsx`):
+   ```typescript
+   // Remove links to Counter, Health, and Auth pages
+   // Keep only Home or add your own navigation
+   ```
+
+5. **Update features index** (`frontend/src/features/index.ts`):
+   ```typescript
+   // Remove exports for deleted features
+   // Add your own feature exports
+   ```
+
+### What to Keep
+
+Keep these foundational pieces:
+
+- **Backend:**
+  - `backend/src/shared/` - Shared utilities, middleware, config
+  - `backend/src/app.ts` - Express app setup
+  - `backend/src/server.ts` - Server entry point
+  - `backend/src/routes/index.ts` - Route definitions (just clear the routes)
+
+- **Frontend:**
+  - `frontend/src/app/` - App shell and routing setup
+  - `frontend/src/components/` - Shared components (Navbar, Footer)
+  - `frontend/src/styles/` - Global styles
+  - `frontend/src/test/` - Test utilities
+
+- **Infrastructure:**
+  - Docker configuration
+  - Database setup
+  - Build configurations
+  - Linting/formatting setup
+
+### Quick Clean Script
+
+Create a cleanup script (`scripts/clean-features.sh`):
+
+```bash
+#!/bin/bash
+
+# Backend
+rm -rf backend/src/features/auth
+rm -rf backend/src/features/users
+rm -rf backend/src/features/health
+
+# Frontend
+rm -rf frontend/src/features/auth
+rm -rf frontend/src/features/counter
+rm -rf frontend/src/features/health
+rm -rf frontend/src/pages/CounterPage
+rm -rf frontend/src/pages/HealthPage
+rm -rf frontend/src/pages/AuthPage
+
+echo "Features removed! Don't forget to update routes and clean up imports."
+```
 
 ## License
 
