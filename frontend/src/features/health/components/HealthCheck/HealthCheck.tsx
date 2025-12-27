@@ -6,6 +6,9 @@ function HealthCheck() {
 
   return (
     <div className={styles.container}>
+      <h3>Response:</h3>
+      {error && <p className={styles.error}>Error: {error.message}</p>}
+      {data && <pre className={styles.codeBlock}>{JSON.stringify(data, null, 2)}</pre>}
       <button
         type="button"
         onClick={() => refetch()}
@@ -14,9 +17,6 @@ function HealthCheck() {
       >
         {isLoading ? 'Fetching...' : 'Refresh'}
       </button>
-      <h3>Response:</h3>
-      {error && <p className={styles.error}>Error: {error.message}</p>}
-      {data && <pre className={styles.codeBlock}>{JSON.stringify(data, null, 2)}</pre>}
     </div>
   );
 }
