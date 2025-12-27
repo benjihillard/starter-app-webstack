@@ -47,5 +47,11 @@ module.exports = {
       },
     ],
     'import/extensions': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        assert: 'either',
+      },
+    ],
   },
 };

@@ -17,30 +17,26 @@ function Login() {
       <h2>Login</h2>
       {loginError && <p className={styles.error}>Error: {(loginError as Error).message}</p>}
       <div className={styles.formGroup}>
-        <label htmlFor="login-email">
-          Email:
-          <input
-            id="login-email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </label>
+        <label htmlFor="login-email">Email:</label>
+        <input
+          id="login-email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className={styles.input}
+        />
       </div>
       <div className={styles.formGroup}>
-        <label htmlFor="login-password">
-          Password:
-          <input
-            id="login-password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </label>
+        <label htmlFor="login-password">Password:</label>
+        <input
+          id="login-password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className={styles.input}
+        />
       </div>
       <button type="submit" disabled={isLoggingIn} className={styles.button}>
         {isLoggingIn ? 'Logging in...' : 'Login'}

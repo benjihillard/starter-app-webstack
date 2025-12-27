@@ -23,46 +23,40 @@ function Signup() {
       <h2>Sign Up</h2>
       {signupError && <p className={styles.error}>Error: {(signupError as Error).message}</p>}
       <div className={styles.formGroup}>
-        <label htmlFor="signup-email">
-          Email:
-          <input
-            id="signup-email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </label>
+        <label htmlFor="signup-email">Email:</label>
+        <input
+          id="signup-email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className={styles.input}
+        />
       </div>
       <div className={styles.formGroup}>
-        <label htmlFor="signup-password">
-          Password:
-          <input
-            id="signup-password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={8}
-            className={styles.input}
-          />
-        </label>
+        <label htmlFor="signup-password">Password:</label>
+        <input
+          id="signup-password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          minLength={8}
+          className={styles.input}
+        />
         <small>Password must be at least 8 characters</small>
       </div>
       <div className={styles.formGroup}>
-        <label htmlFor="signup-confirm-password">
-          Confirm Password:
-          <input
-            id="signup-confirm-password"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            minLength={8}
-            className={styles.input}
-          />
-        </label>
+        <label htmlFor="signup-confirm-password">Confirm Password:</label>
+        <input
+          id="signup-confirm-password"
+          type="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+          minLength={8}
+          className={styles.input}
+        />
         {password && confirmPassword && password !== confirmPassword && (
           <small className={styles.error}>Passwords do not match</small>
         )}
