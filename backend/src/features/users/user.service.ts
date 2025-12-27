@@ -1,6 +1,6 @@
-import { pool } from '../../shared/config/index.js';
+import { pool } from '@/shared/config/index.js';
+import { AppError } from '@/shared/middleware/index.js';
 import { User, CreateUserDto, UserResponse, toUserResponse } from './user.model.js';
-import { AppError } from '../../shared/middleware/index.js';
 
 export const findUserByEmail = async (email: string): Promise<User | null> => {
   const result = await pool.query<User>(

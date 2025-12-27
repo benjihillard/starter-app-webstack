@@ -1,9 +1,9 @@
 import crypto from 'crypto';
-import { config } from '../../shared/config/index.js';
-import { findUserByEmail, createUser } from '../users/user.service.js';
-import { CreateUserDto, UserResponse } from '../users/user.model.js';
-import { validateCreateUser } from '../users/user.validation.js';
-import { AppError } from '../../shared/middleware/index.js';
+import { config } from '@/shared/config/index.js';
+import { findUserByEmail, createUser } from '@/features/users/user.service.js';
+import { CreateUserDto, UserResponse } from '@/features/users/user.model.js';
+import { validateCreateUser } from '@/features/users/user.validation.js';
+import { AppError } from '@/shared/middleware/index.js';
 
 /**
  * Simple password hashing using crypto (for demo purposes)

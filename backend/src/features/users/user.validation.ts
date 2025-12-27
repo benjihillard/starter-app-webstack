@@ -1,4 +1,4 @@
-import { AppError } from '../../shared/middleware/index.js';
+import { AppError } from '@/shared/middleware/index.js';
 
 export const validateEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

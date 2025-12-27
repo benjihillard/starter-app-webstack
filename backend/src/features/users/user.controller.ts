@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { getAllUsers, getUserById, createUser } from './user.service.js';
-import { validateCreateUser } from './user.validation.js';
-import { hashPassword } from '../auth/auth.service.js';
+import { hashPassword } from '@/features/auth/auth.service.js';
 import { CreateUserDto } from './user.model.js';
+import { validateCreateUser } from './user.validation.js';
+import { getAllUsers, getUserById, createUser } from './user.service.js';
 
 export const getUsers = async (_req: Request, res: Response) => {
   const users = await getAllUsers();

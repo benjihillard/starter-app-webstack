@@ -1,4 +1,4 @@
-import { pool } from '../../shared/config/index.js';
+import { pool } from '@/shared/config/index.js';
 
 export const checkDatabaseHealth = async (): Promise<boolean> => {
   try {

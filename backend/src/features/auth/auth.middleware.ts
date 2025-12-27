@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
+import { AppError } from '@/shared/middleware/index.js';
+import { UserResponse, toUserResponse } from '@/features/users/user.model.js';
+import { findUserById } from '@/features/users/user.service.js';
 import { verifyToken } from './auth.service.js';
-import { findUserById } from '../users/user.service.js';
-import { UserResponse, toUserResponse } from '../users/user.model.js';
-import { AppError } from '../../shared/middleware/index.js';
 
 export interface AuthenticatedRequest extends Request {
   user?: UserResponse;

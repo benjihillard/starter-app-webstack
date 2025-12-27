@@ -1,5 +1,5 @@
-import { app } from './app.js';
-import { config, runMigrations } from './shared/config/index.js';
+import { app } from '@/app.js';
+import { config, runMigrations } from '@/shared/config/index.js';
 
 const { port } = config;
 
