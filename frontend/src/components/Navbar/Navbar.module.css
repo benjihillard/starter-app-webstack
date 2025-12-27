@@ -16,6 +16,12 @@
   color: var(--color-purple);
 }
 
+@media (max-width: 600px) {
+  .title {
+    display: none;
+  }
+}
+
 .nav {
   background-color: var(--color-purple);
   border-top-left-radius: 99px;

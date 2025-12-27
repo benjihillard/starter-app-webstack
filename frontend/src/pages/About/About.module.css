@@ -1,6 +1,6 @@
 .container {
   background-color: var(--color-lime);
-  padding: var(--space-md);
+  padding: var(--space-lg);
   width: 85%;
   border-radius: 60px;
   transform: rotate(4deg);

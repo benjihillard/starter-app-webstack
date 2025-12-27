@@ -19,6 +19,9 @@ export default function Navbar() {
         <Link to="/health" className={styles.link}>
           Health
         </Link>
+        <Link to="/auth" className={styles.link}>
+          Auth
+        </Link>
       </nav>
     </div>
   );

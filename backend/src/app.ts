@@ -5,9 +5,9 @@ import morgan from 'morgan';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
 import { router } from './routes/index.js';
+import { errorHandler } from './shared/middleware/index.js';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Security headers
 app.use(helmet());
@@ -33,8 +33,7 @@ app.use(express.json());
 // Routes
 app.use('/api', router);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Error handling middleware (must be last)
+app.use(errorHandler);
 
 export { app };

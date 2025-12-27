@@ -7,11 +7,9 @@ function App() {
   return (
     <div className={styles.container}>
       <Navbar />
-      <hr />
       <div className={styles.main}>
         <Outlet />
       </div>
-      <hr />
       <Footer />
     </div>
   );
