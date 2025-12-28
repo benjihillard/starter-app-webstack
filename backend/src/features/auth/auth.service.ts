@@ -1,9 +1,99 @@
 import crypto from 'crypto';
-import { config } from '@/shared/config/index.js';
-import { findUserByEmail, createUser } from '@/features/users/user.service.js';
-import { CreateUserDto, UserResponse } from '@/features/users/user.model.js';
-import { validateCreateUser } from '@/features/users/user.validation.js';
+import { pool, config } from '@/shared/config/index.js';
 import { AppError } from '@/shared/middleware/index.js';
+
+// Types - internal to auth feature
+interface User {
+  id: number;
+  email: string;
+  passwordHash: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface CreateUserDto {
+  email: string;
+  password: string;
+}
+
+export interface UserResponse {
+  id: number;
+  email: string;
+  createdAt: Date;
+}
+
+// Internal helper to transform User to UserResponse (excludes password)
+const toUserResponse = (user: User): UserResponse => ({
+  id: user.id,
+  email: user.email,
+  createdAt: user.createdAt,
+});
+
+// Validation - internal to auth feature
+const validateEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+const validatePassword = (password: string): boolean => {
+  return password.length >= 8;
+};
+
+const validateCreateUser = (data: { email?: string; password?: string }): void => {
+  if (!data.email || !validateEmail(data.email)) {
+    const error: AppError = new Error('Invalid email format');
+    error.statusCode = 400;
+    error.isOperational = true;
+    throw error;
+  }
+
+  if (!data.password || !validatePassword(data.password)) {
+    const error: AppError = new Error('Password must be at least 8 characters');
+    error.statusCode = 400;
+    error.isOperational = true;
+    throw error;
+  }
+};
+
+// Database operations - internal to auth feature
+const findUserByEmail = async (email: string): Promise<User | null> => {
+  const result = await pool.query<User>(
+    'SELECT id, email, password_hash as "passwordHash", created_at as "createdAt", updated_at as "updatedAt" FROM users WHERE email = $1',
+    [email],
+  );
+  return result.rows[0] || null;
+};
+
+export const findUserById = async (id: number): Promise<User | null> => {
+  const result = await pool.query<User>(
+    'SELECT id, email, password_hash as "passwordHash", created_at as "createdAt", updated_at as "updatedAt" FROM users WHERE id = $1',
+    [id],
+  );
+  return result.rows[0] || null;
+};
+
+export const toUserResponsePublic = (user: User): UserResponse => {
+  return toUserResponse(user);
+};
+
+const createUser = async (data: CreateUserDto, hashedPassword: string): Promise<UserResponse> => {
+  const existingUser = await findUserByEmail(data.email);
+  if (existingUser) {
+    const error: AppError = new Error('Email already registered');
+    error.statusCode = 409;
+    error.isOperational = true;
+    throw error;
+  }
+
+  const result = await pool.query<User>(
+    `INSERT INTO users (email, password_hash, created_at, updated_at)
+     VALUES ($1, $2, NOW(), NOW())
+     RETURNING id, email, password_hash as "passwordHash", created_at as "createdAt", updated_at as "updatedAt"`,
+    [data.email, hashedPassword],
+  );
+
+  return toUserResponse(result.rows[0]);
+};
 
 /**
  * Simple password hashing using crypto (for demo purposes)
@@ -86,11 +176,7 @@ export const login = async (
   const token = generateToken(user.id);
 
   return {
-    user: {
-      id: user.id,
-      email: user.email,
-      createdAt: user.createdAt,
-    },
+    user: toUserResponse(user),
     token,
   };
 };

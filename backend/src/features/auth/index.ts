@@ -7,5 +7,9 @@ export {
   verifyPassword,
   generateToken,
   verifyToken,
+  findUserById,
+  toUserResponsePublic,
+  type CreateUserDto,
+  type UserResponse,
 } from './auth.service.js';
 export { authenticate, AuthenticatedRequest } from './auth.middleware.js';

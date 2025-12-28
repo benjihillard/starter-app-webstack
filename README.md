@@ -69,8 +69,7 @@ npm run dev:frontend
 │   │   ├── server.ts         # Server entry point
 │   │   ├── routes/           # API route definitions
 │   │   ├── features/         # Feature modules
-│   │   │   ├── auth/         # Authentication (login, register)
-│   │   │   ├── users/        # User management
+│   │   │   ├── auth/         # Authentication (login, register, user management)
 │   │   │   └── health/       # Health check endpoint
 │   │   └── shared/           # Shared utilities
 │   │       ├── config/       # Configuration & migrations
@@ -158,25 +157,16 @@ cd frontend && npx vitest run --coverage
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/register` | Register a new user (creates account and returns token) |
 | POST | `/api/auth/login` | Login and get JWT token |
-| GET | `/api/auth/me` | Get current user (requires auth) |
-
-### Users
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/users` | Get all users |
-| GET | `/api/users/:id` | Get user by ID |
-| POST | `/api/users` | Create a new user |
+| GET | `/api/auth/me` | Get current authenticated user (requires Bearer token) |
 
 ## Features
 
 ### Backend
 
 - **Database Migrations**: Automatic schema migrations on server startup
-- **Authentication**: JWT-based authentication with password hashing
-- **User Management**: CRUD operations for users
+- **Authentication**: JWT-based authentication with password hashing and user management (self-contained feature)
 - **Path Aliases**: Use `@/` prefix for cleaner imports (e.g., `@/shared/utils`)
 - **Middleware**: Centralized middleware configuration
 - **Error Handling**: Consistent error handling across all endpoints
@@ -207,7 +197,6 @@ To remove all example features and start building your own:
 1. **Remove feature directories:**
    ```bash
    rm -rf backend/src/features/auth
-   rm -rf backend/src/features/users
    rm -rf backend/src/features/health
    ```
 
@@ -319,7 +308,6 @@ Create a cleanup script (`scripts/clean-features.sh`):
 
 # Backend
 rm -rf backend/src/features/auth
-rm -rf backend/src/features/users
 rm -rf backend/src/features/health
 
 # Frontend

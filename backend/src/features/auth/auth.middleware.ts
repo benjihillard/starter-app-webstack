@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '@/shared/middleware/index.js';
-import { UserResponse, toUserResponse } from '@/features/users/user.model.js';
-import { findUserById } from '@/features/users/user.service.js';
-import { verifyToken } from './auth.service.js';
+import { UserResponse, findUserById, toUserResponsePublic, verifyToken } from './auth.service.js';
 
 export interface AuthenticatedRequest extends Request {
   user?: UserResponse;
@@ -42,7 +40,7 @@ export const authenticate = async (
       throw error;
     }
 
-    req.user = toUserResponse(user);
+    req.user = toUserResponsePublic(user);
     next();
   } catch (error) {
     next(error);
