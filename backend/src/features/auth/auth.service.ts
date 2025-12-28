@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import { pool, config } from '@/shared/config/index.js';
 import { AppError } from '@/shared/middleware/index.js';
+import { validateCreateUser } from './auth.validation.js';
 
 // Types - internal to auth feature
 interface User {
@@ -28,32 +29,6 @@ const toUserResponse = (user: User): UserResponse => ({
   email: user.email,
   createdAt: user.createdAt,
 });
-
-// Validation - internal to auth feature
-const validateEmail = (email: string): boolean => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
-
-const validatePassword = (password: string): boolean => {
-  return password.length >= 8;
-};
-
-const validateCreateUser = (data: { email?: string; password?: string }): void => {
-  if (!data.email || !validateEmail(data.email)) {
-    const error: AppError = new Error('Invalid email format');
-    error.statusCode = 400;
-    error.isOperational = true;
-    throw error;
-  }
-
-  if (!data.password || !validatePassword(data.password)) {
-    const error: AppError = new Error('Password must be at least 8 characters');
-    error.statusCode = 400;
-    error.isOperational = true;
-    throw error;
-  }
-};
 
 // Database operations - internal to auth feature
 const findUserByEmail = async (email: string): Promise<User | null> => {
@@ -179,4 +154,17 @@ export const login = async (
     user: toUserResponse(user),
     token,
   };
+};
+
+export const getCurrentUser = async (userId: number): Promise<UserResponse> => {
+  const user = await findUserById(userId);
+
+  if (!user) {
+    const error: AppError = new Error('User not found');
+    error.statusCode = 404;
+    error.isOperational = true;
+    throw error;
+  }
+
+  return toUserResponse(user);
 };
